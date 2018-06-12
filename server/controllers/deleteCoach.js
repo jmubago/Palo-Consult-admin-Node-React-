@@ -1,7 +1,7 @@
 import repo from '../repositorio'
 import sql from 'msnodesqlv8';
 
-var config = "server=A109;Database=PaloConsult01;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}";
+var config = "server=LAPTOP-LP8FS1UP;Database=PaloConsult01;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}";
 
 export default(function deleteCoach (req, res){
     console.log("reqqqqqqqqqUpdate",req.body);

@@ -6,6 +6,7 @@ import './RegistrationCoach.css';
 class RegistrationCoach extends Component{
     constructor(props){
         super(props)
+        
         this.state={
             Nombre: '',
             Apellido: '',
@@ -23,6 +24,22 @@ class RegistrationCoach extends Component{
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount(){
+        fetch("http://localhost:4000/api/get_coach")
+        .then(res => res.json())
+        .then(
+            (result)=>{
+                this.setState({
+                    get_coach: result
+                });
+            },
+            (error)=>{
+                this.setState({
+                    error: error
+            });    
+        })
     }
 
     openModal(){
@@ -97,22 +114,22 @@ class RegistrationCoach extends Component{
                 
                 <Coach reloadCoach={this.state.get_coach}/>
                 <button className="button button1 button-coach" onClick={() => this.openModal()}>Register new coach</button>
-                <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Register Enterprise">
+                <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Register Enterprise" className="register-modal">
                     <div className="user-modal">
                         <div className="user-modal-container">
                             <div id="signup">
                                 <form onSubmit={this.handleSubmit} method="POST" className="form">
                                     <p className="fieldset">
                                         <label>Name </label>
-                                        <input id="signup-companyName" className="full-width has-padding has-border" placeholder='Company name' name='nameCoach' ref={nameCoach=>this.nameCoach=nameCoach}/>
+                                        <input id="signup-companyName" className="input-register" placeholder='Coach name' name='nameCoach' ref={nameCoach=>this.nameCoach=nameCoach}/>
                                     </p>
                                     <p className="fieldset">
                                         <label>Last name </label>
-                                        <input id="signup-vatNumber" className="full-width has-padding has-border"  placeholder='VAT Number' name='lastName' ref={lastName=>this.lastName=lastName}/>
+                                        <input id="signup-vatNumber" className="input-register"  placeholder='Coach last name' name='lastName' ref={lastName=>this.lastName=lastName}/>
                                         </p>
                                     <p className="fieldset">
                                         <label>Language </label>
-                                        <select id="signup-country" className="full-width has-padding has-border"  name='language' ref={language=>this.language=language}>
+                                        <select id="signup-country" className="input-register"  name='language' ref={language=>this.language=language}>
                                             <option value="1">Spanish</option>
                                             <option value="2">French</option>
                                             <option value="3">English</option>
@@ -123,22 +140,22 @@ class RegistrationCoach extends Component{
                                     </p>
                                     <p className="fieldset">
                                         <label>Email </label>
-                                        <input  id="signup-email" className="full-width has-padding has-border" type="email"  placeholder='Email' name='email' ref={email=>this.email=email}/>
+                                        <input  id="signup-email" className="input-register" type="email"  placeholder='Email' name='email' ref={email=>this.email=email}/>
                                     </p>
                                     <p className="fieldset">
                                         <label>Password </label>
-                                        <input  id="signup-password" className="full-width has-padding has-border" type="password" placeholder='Password' name='password' ref={password=>this.password=password}/>
+                                        <input  id="signup-password" className="input-register" type="password" placeholder='Password' name='password' ref={password=>this.password=password}/>
                                     </p>
                                     <p className="fieldset">
                                         <label>Phone number </label>
-                                        <input  id="signup-phoneNumber" className="full-width has-padding has-border"  placeholder='Phone number' name='phoneNumber' ref={phoneNumber=>this.phoneNumber=phoneNumber}/>
+                                        <input  id="signup-phoneNumber" className="input-register"  placeholder='Phone number' name='phoneNumber' ref={phoneNumber=>this.phoneNumber=phoneNumber}/>
                                     </p>
                                     <p className="fieldset">
                                         <label>Bank account </label>
-                                        <input  id="signup-bankAccount" className="full-width has-padding has-border"  placeholder='Bank account' name='bankAccount' ref={bankAccount=>this.bankAccount=bankAccount}/>
+                                        <input  id="signup-bankAccount" className="input-register"  placeholder='Bank account' name='bankAccount' ref={bankAccount=>this.bankAccount=bankAccount}/>
                                     </p>
                                     <p className="fieldset">
-                                        <button className="">Submit</button>
+                                        <button className="button-small button1">Submit</button>
                                     </p>
                                 </form>
                             </div>

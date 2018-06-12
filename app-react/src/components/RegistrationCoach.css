@@ -1,5 +1,5 @@
 .button {
-  background-color: #fa4251; 
+  background-color: #439a46; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -16,5 +16,45 @@
 .button-coach{
   margin-top: 20px;
   margin-bottom: 50px;
-  margin-left: 830px;
+  margin-left: 42%;
+}
+
+.register-modal{
+  position: relative;
+  background-color:#7f807f31;
+  width: 40%;
+  padding: 1.2rem;
+  box-shadow: 0 12px 15px 0 rgba(0,0,0,0.2);
+  top:2.5%;
+  left:30%;
+}
+
+.input-register{
+  width: 100%;
+  padding: 8px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.fieldset{
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size: 0.9rem;
+  font-weight: 350;
+  line-height: 1;
+  color: #213333;
+}
+
+.something{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }

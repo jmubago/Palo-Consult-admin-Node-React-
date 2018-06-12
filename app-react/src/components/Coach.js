@@ -8,13 +8,16 @@ class Coach extends Component{
         this.state={
             //error=null,
             get_coach: [],
-            modalIsOpen: false,
+            openFirstModal: false,
+            openSecondModal:false,
+            openThirdModal:false
         };
         this.onOpenFirstModal = this.onOpenFirstModal.bind(this);
         this.onOpenSecondModal = this.onOpenSecondModal.bind(this);
-        this.onCloseFirstModal = this.onCloseFirstModal.bind(this);
+        this.onOpenThirdModal = this.onOpenThirdModal.bind(this);
+        // this.onCloseFirstModal = this.onCloseFirstModal.bind(this);
         this.onCloseSecondModal = this.onCloseSecondModal.bind(this);
-        //this.logChange = this.logChange.bind(this); // We capture the value and change state as user changes the value here.
+        this.onCloseThirdModal = this.onCloseThirdModal.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
     }
 
@@ -28,6 +31,7 @@ class Coach extends Component{
             Iban: Coach.IBAN,
             id: Coach.id
         });
+        //console.log ("open first modal");
     }
 
     onOpenSecondModal(Coach){
@@ -37,7 +41,7 @@ class Coach extends Component{
         var data = {
             id: Coach.id
         }
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
         fetch('http://localhost:4000/api/deleteCoach', {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'},
@@ -56,10 +60,25 @@ class Coach extends Component{
         });
     }
 
-    onCloseFirstModal(){
-        console.log("close modaaaaaaaal 1")
+    onOpenThirdModal(Coach){
         this.setState({
-            openFirstModal: false
+            openThirdModal: true,
+            openFirstModal: false,
+        });
+       // console.log ("open third modal");
+    }
+
+    // onCloseFirstModal(){
+    //     console.log ("close first modal");
+    //     this.setState({
+    //         openFirstModal: false,
+    //     });
+    // }
+
+    onCloseSecondModal(){
+        //console.log("close second modal")
+        this.setState({
+            openSecondModal: false
         });
         fetch("http://localhost:4000/api/get_coach")
             .then(res => res.json())
@@ -77,10 +96,10 @@ class Coach extends Component{
             })
     }
 
-    onCloseSecondModal(){
-        console.log("close modaaaaaaaal 2")
+    onCloseThirdModal(){
+        //console.log("close first and third modal")
         this.setState({
-            openSecondModal: false
+            openThirdModal: false,
         });
         fetch("http://localhost:4000/api/get_coach")
             .then(res => res.json())
@@ -128,7 +147,7 @@ class Coach extends Component{
         this.setState({
             get_coach: nextProps.reloadCoach
         })
-        console.log("componentWillReceivePropsssssssss", this.state.get_coach);
+        //console.log("componentWillReceivePropsssssssss", this.state.get_coach);
     }
 
     componentDidMount() {
@@ -149,7 +168,7 @@ class Coach extends Component{
     }
 
     render(){
-        const { openFirstModal, openSecondModal } = this.state;
+        const { openFirstModal, openSecondModal, openThirdModal } = this.state;
         return(
             <div className="container-table200">
                 <div className="wrap-table200">
@@ -183,36 +202,41 @@ class Coach extends Component{
                                         <td className="cell100 column7-1"><button className="button-small button1"  onClick={() => this.onOpenFirstModal(Coach)}>Edit</button> | <button className="button-small button1" onClick={() => this.onOpenSecondModal(Coach)}>Delete</button></td>
                                         </tr>
                                     )}
-                                    <Modal  open={openFirstModal} onClose={this.onCloseFirstModal} contentLabel="Enterprise update">
+                                    <Modal  open={openFirstModal} onClose={this.onCloseFirstModal} contentLabel="Enterprise update" className="update-modal">
                                         <form onSubmit={this.handleEdit} method="POST">
-                                            <div>
+                                            <div className="fieldset">
                                                 <label>Coach name </label>
-                                                <input  className="form-control"  placeholder='Company name' name='companyName' ref={coachName=>this.coachName=coachName}/>
+                                                <input  className="input-register"  placeholder='Coach name' name='companyName' ref={coachName=>this.coachName=coachName}/>
                                             </div>
-                                            <div>
+                                            <div className="fieldset">
                                                 <label>Coach lastname  </label>
-                                                <input  className="form-control"  placeholder='VAT Number' name='vatNumber' ref={coachLastname=>this.coachLastname=coachLastname}/>
+                                                <input  className="input-register"  placeholder='Coach last name' name='vatNumber' ref={coachLastname=>this.coachLastname=coachLastname}/>
                                             </div>
-                                            <div>
+                                            <div className="fieldset">
                                                 <label>Email </label>
-                                                <input  className="form-control"  placeholder='VAT Number' name='vatNumber' ref={email=>this.email=email}/>
+                                                <input  className="input-register"  placeholder='Email' name='vatNumber' ref={email=>this.email=email}/>
                                             </div>
-                                            <div>
+                                            <div className="fieldset">
                                                 <label>Phone number </label>
-                                                <input  className="form-control"  placeholder='VAT Number' name='vatNumber' ref={phoneNumber=>this.phoneNumber=phoneNumber}/>
+                                                <input  className="input-register"  placeholder='Phone number' name='vatNumber' ref={phoneNumber=>this.phoneNumber=phoneNumber}/>
                                             </div>
-                                            <div>
+                                            <div className="fieldset">
                                                 <label>Bank account </label>
-                                                <input  className="form-control"  placeholder='VAT Number' name='vatNumber' ref={bankAccount=>this.bankAccount=bankAccount}/>
+                                                <input  className="input-register"  placeholder='Bank account' name='vatNumber' ref={bankAccount=>this.bankAccount=bankAccount}/>
                                             </div>
                                             <div className="submit-section">
-                                                <button className="btn btn-uth-submit">Submit</button>
+                                                <button className="button-small button1" onClick={() => this.onOpenThirdModal(Coach)}>Submit</button>
                                             </div>
                                         </form>
                                     </Modal>
                                     <Modal open={openSecondModal} onClose={this.onCloseSecondModal} contentLabel="Enterprise update">
                                             <div>
                                                 You have successfully deleted this coach
+                                            </div>
+                                    </Modal>
+                                    <Modal open={openThirdModal} onClose={this.onCloseThirdModal} contentLabel="Enterprise update">
+                                            <div>
+                                                You have successfully updated this coach
                                             </div>
                                     </Modal>
                                 </tbody>

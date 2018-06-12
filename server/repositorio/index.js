@@ -1,6 +1,6 @@
 import sql from 'msnodesqlv8';
 
-var config = "server=A109;Database=PaloConsult01;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}";
+var config = "server=LAPTOP-LP8FS1UP;Database=PaloConsult01;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}";
 var candidateWithCoach = "select COUNT(id) AS candidatesWithCoach from dbo.Usuarios where Coach<>22";
 var candidateWithOutCoach = "select COUNT(id) AS candidatesWithOutCoach from dbo.Usuarios where Coach=22";
 var enterprises = "select em.id,em.RazonSocial,em.Direccion,em.Telefono,em.EmailContacto,em.IBAN,SUM(us.Horas) AS TotalSessions,COUNT(us.idEmpresa) AS NumberCandidates from dbo.Empresa AS em LEFT JOIN dbo.Usuarios AS us ON us.idEmpresa=em.id GROUP BY em.id,em.RazonSocial,em.Direccion,em.Telefono,em.EmailContacto,em.IBAN";

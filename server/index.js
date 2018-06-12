@@ -2,7 +2,7 @@ import sql from './repositorio/'
 import express from 'express'
 import api from './routes/api'
 
-var config = "server=A109;Database=PaloConsult01;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}";
+var config = "server=LAPTOP-LP8FS1UP;Database=PaloConsult01;Trusted_Connection=Yes;Driver={SQL Server Native Client 11.0}";
 
 var bodyParser = require('express');
 var app = express();
